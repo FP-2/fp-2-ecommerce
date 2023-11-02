@@ -16,12 +16,15 @@ import ProductDetails from "./components/ProductsDetails";
 const Layout = () => {
   return (
     <div>
-      <Header /> {/* bagian header navbar */}
-      <ScrollRestoration />
+      {/* bagian header navbar */}
+      <Header />
       {/* ScrollRestoration, untuk otomatis ke bagian paling atas saat ke home dari page lain,
       agar tidak perlu scroll keatas terlebih dahulu */}
-      <Outlet /> {/* bagian isi, bagian "children" di router bawah */}
-      <Footer /> {/* bagian Footer */}
+      <ScrollRestoration />
+      {/* bagian isi, bagian "children" di router bawah */}
+      <Outlet />
+      {/* bagian Footer */}
+      <Footer />
     </div>
   );
 };
@@ -32,24 +35,30 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Ecommerce />, //Home ecommerce
-        loader: productsData, //loader, untuk mengambil api dari folder api/Api.js (nyoba routing versi terbaru untuk fething lebih mudah, 1 fetch bisa digunakan banyak tinggal di loader)
+        //Home ecommerce
+        element: <Ecommerce />,
+        //loader, untuk mengambil api dari folder api/Api.js (nyoba routing versi terbaru untuk fething lebih mudah, 1 fetch bisa digunakan banyak tinggal di loader)
+        loader: productsData,
       },
       {
         path: "/productdetails/:id",
-        element: <ProductDetails />, //page Product Details
+        //page Product Details
+        element: <ProductDetails />,
       },
       {
         path: "/cart",
-        element: <Cart />, //page cart checkout (testing routing)
+        //page cart checkout (testing routing)
+        element: <Cart />,
       },
       {
         path: "/shop",
-        element: <Shop />, //page shop (testing routing)
+        //page shop (testing routing)
+        element: <Shop />,
       },
       {
         path: "/login",
-        element: <Login />, //page login (testing routing)
+        //page login (testing routing)
+        element: <Login />,
       },
     ],
   },

@@ -9,7 +9,7 @@ const Header = () => {
         <Link to="/">
           <div>
             <h1 className="font-tittleFont font-bold text-3xl hover:scale-105 duration-300">
-              Team-VII
+              Team-VIII
             </h1>
           </div>
         </Link>
