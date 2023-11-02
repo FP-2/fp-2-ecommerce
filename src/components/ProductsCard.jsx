@@ -3,11 +3,38 @@ import { BsArrowRight } from "react-icons/bs";
 //framerMotion, untuk animasi
 import { motion } from "framer-motion";
 import { viewportScaleDownFadeUp } from "../framerMotion";
+import { useNavigate } from "react-router";
 
 const ProductsCard = ({ product }) => {
+  const navigate = useNavigate();
+
+  //variabel _id mengambil dari product.title (dari fetch api)
+  const _id = product.title;
+
+  //idString, mengubah _id (product.title) menjadi text kecil semua & tanpa spasi
+  const idString = (_id) => {
+    return String(_id).toLowerCase().split(" ").join("");
+  };
+
+  //variabel routing _id, mengambil dari variabel idString
+  const routingId = idString(_id);
+
+  //handle untuk button onclick, untuk navigate (pindah page) ke /productdetails/id, id (sesuai nama product yang di klick)
+  const handleDetails = () => {
+    navigate(`/productdetails/${routingId}`, {
+      //state: {item: product,} ini untuk mengirimkan state ke page yang di navigate (yaitu /detailsproduct) dengan variabel bernama "item" sambil membawa data fetch dari prop "product"
+      state: {
+        item: product,
+      },
+    });
+  };
+
   return (
     <motion.div {...viewportScaleDownFadeUp} className="group relative">
-      <div className="w-full h-96 cursor-pointer overflow-hidden">
+      <div
+        onClick={handleDetails}
+        className="w-full h-96 cursor-pointer overflow-hidden"
+      >
         {/* menampilkan gambar product */}
         <img
           className="w-full h-full object-cover group-hover:scale-110 duration-300"
