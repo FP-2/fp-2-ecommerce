@@ -11,6 +11,7 @@ import Cart from "./pages/Cart";
 import Shop from "./pages/Shop";
 import Login from "./pages/Login";
 import Footer from "./components/Footer";
+import ProductDetails from "./components/ProductsDetails";
 
 const Layout = () => {
   return (
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
         path: "/",
         element: <Ecommerce />, //Home ecommerce
         loader: productsData, //loader, untuk mengambil api dari folder api/Api.js (nyoba routing versi terbaru untuk fething lebih mudah, 1 fetch bisa digunakan banyak tinggal di loader)
+      },
+      {
+        path: "/productdetails/:id",
+        element: <ProductDetails />, //page Product Details
       },
       {
         path: "/cart",
