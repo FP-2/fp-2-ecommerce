@@ -5,10 +5,13 @@ const Products = ({ product }) => {
   return (
     <div className="py-10">
       <div className="flex flex-col items-center gap-4">
+        {/* text shoping everyday dengan border hitam */}
         <h1 className="text-2xl bg-black text-white py-2 w-80 text-center">
           shoping everyday
         </h1>
+        {/* garis hitam dibawah text shoping everyday */}
         <span className="w-20 h-[3px] bg-black "></span>
+        {/* deskripsi asal */}
         <p className="max-w-[700px] text-gray-600 text-center ">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam
           tempore adipisci quos vitae! Blanditiis adipisci consectetur suscipit
@@ -16,11 +19,12 @@ const Products = ({ product }) => {
           itaque, totam voluptate placeat voluptatem possimus aspernatur. Est,
           pariatur architecto? Enim, quidem asperiores!
         </p>
+        {/* product, mengambil data gambar dari components "ProductsCard" */}
         <div className="max-w-screen-xl mx-auto py-10 grid grid-cols-4 gap-10">
           {product.map((item) => (
-            <ProductsCard key={item.id} product={item} />
+            <ProductsCard key={item._id} product={item} />
           ))}
-          {/* data fetch di dapatkan dari props page ecommerce menggunakan "useLoaderData" */}
+          {/* data fetch "product" di dapatkan dari props page "Ecommerce" menggunakan "useLoaderData" */}
         </div>
       </div>
     </div>
