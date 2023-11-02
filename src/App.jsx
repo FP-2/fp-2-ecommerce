@@ -1,20 +1,58 @@
-import { Route, Routes } from "react-router-dom";
+import {
+  Outlet,
+  RouterProvider,
+  ScrollRestoration,
+  createBrowserRouter,
+} from "react-router-dom";
 import Header from "./components/Header";
 import Ecommerce from "./pages/Ecommerce";
+import { productsData } from "./api/Api";
+import Cart from "./pages/Cart";
 import Shop from "./pages/Shop";
 import Login from "./pages/Login";
-import Cart from "./pages/Cart";
+import Footer from "./components/Footer";
 
-function App() {
+const Layout = () => {
   return (
     <div>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Ecommerce />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+      <Header /> {/* bagian header navbar */}
+      <ScrollRestoration />
+      {/* ScrollRestoration, untuk otomatis ke bagian paling atas saat ke home dari page lain,
+      agar tidak perlu scroll keatas terlebih dahulu */}
+      <Outlet /> {/* bagian isi, bagian "children" di router bawah */}
+      <Footer /> {/* bagian Footer */}
+    </div>
+  );
+};
+
+const router = createBrowserRouter([
+  {
+    element: <Layout />,
+    children: [
+      {
+        path: "/",
+        element: <Ecommerce />, //Home ecommerce
+        loader: productsData, //loader, untuk mengambil api dari folder api/Api.js (nyoba routing versi terbaru untuk fething lebih mudah, 1 fetch bisa digunakan banyak tinggal di loader)
+      },
+      {
+        path: "/cart",
+        element: <Cart />, //page cart checkout (testing routing)
+      },
+      {
+        path: "/shop",
+        element: <Shop />, //page shop (testing routing)
+      },
+      {
+        path: "/login",
+        element: <Login />, //page login (testing routing)
+      },
+    ],
+  },
+]);
+function App() {
+  return (
+    <div className="font-bodyFont">
+      <RouterProvider router={router} />
     </div>
   );
 }
