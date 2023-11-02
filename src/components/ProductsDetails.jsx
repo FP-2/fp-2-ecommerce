@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { MdOutlineStar } from "react-icons/md";
+//framer motion, untuk animasi
+import { motion } from "framer-motion";
+import { slideDown, slideLeft } from "../framerMotion";
 
 const ProductDetails = () => {
   //location, untuk mengakses data yang telah di kirimkan melalui navigasi dari halaman sebelumnya yaitu state yang dikirimkan dari (/products card)
@@ -17,7 +20,7 @@ const ProductDetails = () => {
   return (
     <div>
       <div className="max-w-screen-xl mx-auto my-10 flex gap-10">
-        <div className="w-2/5 relative">
+        <motion.div {...slideDown} className="w-2/5 relative">
           {/* product Image */}
           <img
             className="w-full h-[550px] object-cover "
@@ -32,8 +35,11 @@ const ProductDetails = () => {
               </p>
             )}
           </div>
-        </div>
-        <div className="w-3/5 flex flex-col justify-center gap-12">
+        </motion.div>
+        <motion.div
+          {...slideLeft}
+          className="w-3/5 flex flex-col justify-center gap-12"
+        >
           <div>
             {/* nama product */}
             <h2 className="text-4xl font-semibold">{productDetails.title}</h2>
@@ -97,7 +103,7 @@ const ProductDetails = () => {
               {productDetails.category}
             </span>
           </p>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

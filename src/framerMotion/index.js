@@ -48,6 +48,11 @@ export const scaleDown = {
   transition: transition1,
 };
 
+export const slideDown = {
+  initial: { opacity: 0, y: -80 },
+  animate: { opacity: 1, y: 0 },
+  transition: transition1,
+};
 export const slideRight = {
   initial: { opacity: 0, x: -80 },
   animate: { opacity: 1, x: 0 },
