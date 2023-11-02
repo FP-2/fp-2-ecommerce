@@ -22,6 +22,7 @@ const ProductsCard = ({ product }) => {
   //handle untuk button onclick, untuk navigate (pindah page) ke /productdetails/id, id (sesuai nama product yang di klick)
   const handleDetails = () => {
     navigate(`/productdetails/${routingId}`, {
+      //state: {item: product,} ini untuk mengirimkan state ke page yang di navigate (yaitu /detailsproduct) dengan variabel bernama "item" sambil membawa data fetch dari prop "product"
       state: {
         item: product,
       },

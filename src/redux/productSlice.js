@@ -6,21 +6,10 @@ const initialState = {
 };
 
 export const productSlice = createSlice({
-  nama: "product",
+  name: "product",
   initialState,
-  reducers: {
-    addToCart: (state, action) => {
-      const item = state.productData.find(
-        (item) => item._id === action.payload._id
-      );
-      if (item) {
-        item.quantity += action.payload.quantity;
-      } else {
-        state.productData.push(action.payload);
-      }
-    },
-  },
+  reducers: {},
 });
 
-export const { addToCart } = productSlice.actions;
+export const {} = productSlice.actions;
 export default productSlice.reducer;
