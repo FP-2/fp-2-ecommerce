@@ -1,8 +1,12 @@
 /* eslint-disable react/prop-types */
 import { BsArrowRight } from "react-icons/bs";
+//framerMotion, untuk animasi
+import { motion } from "framer-motion";
+import { FadeUp } from "../framerMotion";
+
 const ProductsCard = ({ product }) => {
   return (
-    <div className="group relative">
+    <motion.div {...FadeUp} className="group relative">
       <div className="w-full h-96 cursor-pointer overflow-hidden">
         {/* menampilkan gambar product */}
         <img
@@ -54,7 +58,7 @@ const ProductsCard = ({ product }) => {
           )}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

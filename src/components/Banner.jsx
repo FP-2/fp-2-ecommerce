@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { HiArrowRight, HiArrowLeft } from "react-icons/hi";
+//framerMotion, untuk animasi
+import { motion } from "framer-motion";
+import { scaleDown, slideLeft, slideRight } from "../framerMotion";
 
 const Banner = () => {
   //state untuk banner slider
@@ -24,7 +27,7 @@ const Banner = () => {
   };
 
   return (
-    <div className="w-full h-auto overflow-x-hidden">
+    <motion.div {...scaleDown} className="w-full h-auto overflow-x-hidden">
       <div className="w-screen h-[650px] relative">
         {/* transforrm: agar banner bisa di slide */}
         <div
@@ -67,23 +70,25 @@ const Banner = () => {
         </div>
         <div className="absolute w-fit left-0 right-0 mx-auto flex gap-8 bottom-44">
           {/* button prev */}
-          <div
+          <motion.div
+            {...slideRight}
             onClick={prevSlide}
             className="w-14 h-12 border-[1px] border-gray-700 flex items-center justify-center hover:cursor-pointer hover:bg-gray-700 hover:text-white active:bg-gray-900 duration-300"
           >
             <HiArrowLeft />
-          </div>
+          </motion.div>
 
           {/* button next */}
-          <div
+          <motion.div
+            {...slideLeft}
             onClick={nextSlide}
             className="w-14 h-12 border-[1px] border-gray-700 flex items-center justify-center hover:cursor-pointer hover:bg-gray-700 hover:text-white active:bg-gray-900 duration-300"
           >
             <HiArrowRight />
-          </div>
+          </motion.div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
