@@ -1,7 +1,7 @@
 import ProductsCard from "./ProductsCard";
 import { motion } from "framer-motion";
 //framerMotion, untuk animasi
-import { FadeUp } from "../framerMotion";
+import { viewportSlideLeft, viewportSlideRight } from "../framerMotion";
 
 /* eslint-disable react/prop-types */
 const Products = ({ product }) => {
@@ -9,7 +9,7 @@ const Products = ({ product }) => {
     <div className="py-10">
       <div className="flex flex-col items-center gap-4">
         {/* text shoping everyday dengan border hitam */}
-        <motion.div {...FadeUp}>
+        <motion.div {...viewportSlideRight}>
           <h1 className="text-2xl bg-black text-white py-2 w-80 text-center">
             shoping everyday
           </h1>
@@ -18,7 +18,7 @@ const Products = ({ product }) => {
         {/* garis hitam dibawah text shoping everyday */}
 
         {/* deskripsi asal */}
-        <motion.div {...FadeUp}>
+        <motion.div {...viewportSlideLeft}>
           <p className="max-w-[700px] text-gray-600 text-center ">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam
             tempore adipisci quos vitae! Blanditiis adipisci consectetur

@@ -2,11 +2,11 @@
 import { BsArrowRight } from "react-icons/bs";
 //framerMotion, untuk animasi
 import { motion } from "framer-motion";
-import { FadeUp } from "../framerMotion";
+import { viewportScaleDownFadeUp } from "../framerMotion";
 
 const ProductsCard = ({ product }) => {
   return (
-    <motion.div {...FadeUp} className="group relative">
+    <motion.div {...viewportScaleDownFadeUp} className="group relative">
       <div className="w-full h-96 cursor-pointer overflow-hidden">
         {/* menampilkan gambar product */}
         <img
