@@ -13,6 +13,7 @@ import Login from "./pages/Login";
 import Footer from "./components/Footer";
 import ProductDetails from "./components/ProductsDetails";
 
+
 const Layout = () => {
   return (
     <div>
@@ -64,6 +65,7 @@ const router = createBrowserRouter([
   },
 ]);
 function App() {
+
   return (
     <div className="font-bodyFont">
       <RouterProvider router={router} />

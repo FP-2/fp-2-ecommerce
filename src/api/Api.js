@@ -6,3 +6,9 @@ export async function productsData() {
   );
   return products;
 }
+
+export const auth = async ({ username, password }) => {
+  return axios.post("https://fakestoreapi.com/auth/login", {
+      username,
+      password
+  });}
