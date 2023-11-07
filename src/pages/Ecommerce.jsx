@@ -2,8 +2,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Banner from "../components/Banner";
 import Products from "../components/Products";
-import { fetchProducts } from "../redux/productSlice"; 
-
+import { fetchProducts } from "../redux/productSlice";
 
 const Ecommerce = () => {
   const products = useSelector((state) => state.product.productData);
