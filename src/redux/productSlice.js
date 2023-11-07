@@ -3,6 +3,7 @@ import { productsData } from "../api/Api";
 
 const initialState = {
   productData: [],
+  items: [],
   userInfo: null,
   loading: false,
   error: null,
@@ -30,6 +31,12 @@ export const productSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    addToCart: (state, action) => {
+      state.items.push(action.payload); // Menambahkan produk ke keranjang
+    },
+    removeFromCart: (state, action) => {
+      state.items = state.items.filter(item => item.id !== action.payload.id); // Menghapus produk dari keranjang
+    },
   },
 });
 
@@ -39,6 +46,8 @@ export const {
   fetchProductsStart,
   fetchProductsSuccess,
   fetchProductsFailure,
+  addToCart,
+  removeFromCart,
 } = productSlice.actions;
 
 export default productSlice.reducer;

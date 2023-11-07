@@ -4,9 +4,15 @@ import { BsArrowRight } from "react-icons/bs";
 import { motion } from "framer-motion";
 import { viewportScaleDownFadeUp } from "../framerMotion";
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/productSlice";
 
 const ProductsCard = ({ product }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const handleAddToCart = () => {
+    dispatch(addToCart(product));
+  };
 
   //variabel _id mengambil dari product.title (dari fetch api)
   const _id = product.title;
@@ -62,9 +68,9 @@ const ProductsCard = ({ product }) => {
             </div>
 
             {/* menampilkan text "add to cart" */}
-            <p className="absolute z-20 w-[100px] text-gray-500 hover:text-gray-900 flex items-center gap-1 top-0 transform -translate-x-32 group-hover:translate-x-0 transition-transform cursor-pointer duration-300">
+            <p onClick={handleAddToCart} className="absolute z-20 w-[100px] text-gray-500 hover:text-gray-900 flex items-center gap-1 top-0 transform -translate-x-32 group-hover:translate-x-0 transition-transform cursor-pointer duration-300">
               add to cart
-              <span>
+              <span >
                 <BsArrowRight />
               </span>
             </p>
@@ -80,7 +86,7 @@ const ProductsCard = ({ product }) => {
         <div className="absolute top-4 right-0">
           {product.isNew && (
             <p className="bg-black text-white font-semibold font-tittleFont px-6 py-1">
-              Sale
+              New
             </p>
           )}
         </div>
