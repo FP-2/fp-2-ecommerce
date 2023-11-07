@@ -23,7 +23,7 @@ export const productSlice = createSlice({
       state.error = null;
     },
     fetchProductsSuccess: (state, action) => {
-      state.products = action.payload;
+      state.productData = action.payload;
       state.loading = false;
     },
     fetchProductsFailure: (state, action) => {
@@ -34,12 +34,13 @@ export const productSlice = createSlice({
 });
 
 export const {
-  setProductData, 
-  setUserInfo, 
+  setProductData,
+  setUserInfo,
   fetchProductsStart,
   fetchProductsSuccess,
   fetchProductsFailure,
 } = productSlice.actions;
+
 export default productSlice.reducer;
 
 export const fetchProducts = () => async (dispatch) => {
