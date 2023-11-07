@@ -6,7 +6,7 @@ import { fetchProducts } from "../redux/productSlice";
 
 
 const Ecommerce = () => {
-  const products = useSelector((state) => state.product.products);
+  const products = useSelector((state) => state.product.productData);
   const dispatch = useDispatch();
 
   //useEffects, untuk set products dari dataLoader yang telah di ambil
