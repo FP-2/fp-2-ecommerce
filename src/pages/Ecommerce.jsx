@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Banner from "../components/Banner";
 import Products from "../components/Products";
-import { useLoaderData } from "react-router";
+import { fetchProducts } from "../redux/productSlice";
 
 const Ecommerce = () => {
-  const [products, setProducts] = useState([]);
-  //useLoaderData, untuk manggil (load) api yang sudah di panggil pada router di app.js page ecommerce dengan menggunakan "loader", (mencoba routing baru buat nyoba fetching)
-  const dataLoader = useLoaderData();
+  const products = useSelector((state) => state.product.productData);
+  const dispatch = useDispatch();
 
   //useEffects, untuk set products dari dataLoader yang telah di ambil
   useEffect(() => {
-    setProducts(dataLoader.data);
-  }, [dataLoader]);
+    dispatch(fetchProducts());
+  }, [dispatch]);
   return (
     <div>
       {/* menampilkan banner */}
