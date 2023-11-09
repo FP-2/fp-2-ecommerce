@@ -1,6 +1,6 @@
 // import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addToCart, removeFromCart } from "../redux/productSlice";
+import { addToCart, removeFromCart, setBadges } from "../redux/productSlice";
 import ProductsCard from "../components/ProductsCard";
 import { motion } from "framer-motion";
 import { viewportSlideRight } from "../framerMotion";
@@ -27,6 +27,7 @@ function Cart() {
   //fungsi untuk menghapus
   const handleRemoveFromCart = (product) => {
     dispatch(removeFromCart(product));
+    dispatch(setBadges());
   };
   
   return (

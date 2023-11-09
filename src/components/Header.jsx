@@ -2,11 +2,14 @@ import { Link,useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { cartImg } from "../assets";
 import { MDBBadge } from "mdb-react-ui-kit";
+// import { setBadges } from "../redux/productSlice";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const navigate = useNavigate();
   const auth = JSON.parse(localStorage.getItem("auth"));
-  const item = JSON.parse(localStorage.getItem('cartItems')) || [];
+  const item = useSelector(state => state.product.count);
+
 
     const handleLogout = () => {
         Swal.fire({
@@ -56,7 +59,7 @@ const Header = () => {
           <Link to="/cart">
             <div className="relative hover:scale-105 duration-300 flex items-center">
               <img className="w-6" src={cartImg} alt="cartImg" />
-              <MDBBadge className='ms-2'>{item.length}</MDBBadge>
+              <MDBBadge className='ms-2'>{item}</MDBBadge>
             </div>
           </Link>
           {/* navbar, Image Login */}

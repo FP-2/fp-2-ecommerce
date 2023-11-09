@@ -5,14 +5,14 @@ import { motion } from "framer-motion";
 import { viewportScaleDownFadeUp } from "../framerMotion";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../redux/productSlice";
+import { addToCart,setBadges } from "../redux/productSlice";
 
 const ProductsCard = ({ product }) => {
-  const auth = JSON.parse(localStorage.getItem("auth"));
-  const Dispatch = useDispatch;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleAddToCart = () => {
-    Dispatch(addToCart(product));
+    dispatch(addToCart(product));
+    dispatch(setBadges());
   };
 
   //variabel _id mengambil dari product.title (dari fetch api)
@@ -69,14 +69,13 @@ const ProductsCard = ({ product }) => {
             </div>
 
             {/* menampilkan text "add to cart" */}
-            {auth ?
+
             <p onClick={handleAddToCart} className="absolute z-20 w-[100px] text-gray-500 hover:text-gray-900 flex items-center gap-1 top-0 transform -translate-x-32 group-hover:translate-x-0 transition-transform cursor-pointer duration-300">
               add to cart
-              <span>
+              <span >
                 <BsArrowRight />
               </span>
             </p>
-            :<></>}
           </div>
         </div>
 

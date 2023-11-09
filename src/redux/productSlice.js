@@ -7,6 +7,7 @@ const initialState = {
   userInfo: null,
   loading: false,
   error: null,
+  count:0,
 };
 
 export const productSlice = createSlice({
@@ -18,6 +19,9 @@ export const productSlice = createSlice({
     },
     setUserInfo: (state, action) => {
       state.userInfo = action.payload;
+    },
+    setBadges : (state) =>{
+      state.count = JSON.parse(localStorage.getItem('cartItems'))?.length || 0;
     },
     fetchProductsStart: (state) => {
       state.loading = true;
@@ -50,6 +54,7 @@ export const {
   fetchProductsFailure,
   addToCart,
   removeFromCart,
+  setBadges,
 } = productSlice.actions;
 
 export default productSlice.reducer;

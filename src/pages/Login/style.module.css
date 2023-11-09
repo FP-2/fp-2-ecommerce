@@ -8,3 +8,9 @@
     flex-direction: column;
     margin-top: 2rem;
 }
+.loginPage{
+    background-image: url(../../assets/login.jpg);
+    min-height: 100vh;
+    width: auto;
+    background-size: cover;
+}
