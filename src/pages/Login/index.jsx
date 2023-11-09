@@ -16,7 +16,7 @@ const Login = () => {
             authenticate.roles === "user" ?
                 navigate("/")
                 :
-                navigate("/admin")
+                navigate("/shop")
         }
     })
 
@@ -32,7 +32,7 @@ const Login = () => {
                 roles: "admin"
             }
             localStorage.setItem("auth", JSON.stringify(auth));
-            navigate("/admin");
+            navigate("/shop");
             Swal.fire({
                 title: "Login Success",
                 icon: "success"
