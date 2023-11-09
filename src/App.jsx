@@ -6,7 +6,6 @@ import {
 } from "react-router-dom";
 import Header from "./components/Header";
 import Ecommerce from "./pages/Ecommerce";
-import { productsData } from "./api/Api";
 import Cart from "./pages/Cart";
 import Shop from "./pages/Shop";
 import Login from "./pages/Login";
@@ -38,8 +37,6 @@ const router = createBrowserRouter([
         path: "/",
         //Home ecommerce
         element: <Ecommerce />,
-        //loader, untuk mengambil api dari folder api/Api.js (nyoba routing versi terbaru untuk fething lebih mudah, 1 fetch bisa digunakan banyak tinggal di loader)
-        loader: productsData,
       },
       {
         path: "/productdetails/:id",

@@ -1,10 +1,12 @@
 import { Link,useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { cartImg } from "../assets";
+import { MDBBadge } from "mdb-react-ui-kit";
 
 const Header = () => {
   const navigate = useNavigate();
   const auth = JSON.parse(localStorage.getItem("auth"));
+  const item = JSON.parse(localStorage.getItem('cartItems')) || [];
 
     const handleLogout = () => {
         Swal.fire({
@@ -37,7 +39,7 @@ const Header = () => {
             </h1>
           </div>
         </Link>
-        <div className="flex items-center gap-8">
+        <div className="flex justify-center items-center gap-8">
           <ul className="flex items-center gap-8">
             {/* navbar E-commerce */}
             <li className="text-base text-black font-bold hover:text-orange-900 underline-offset-2 decoration-[1px] cursor-pointer hover:scale-105 duration-300">
@@ -49,16 +51,15 @@ const Header = () => {
             </li>
           </ul>
           {/* navbar login,logout */}
-          <Link to="/login">Login</Link>
-          { auth ? <Link onClick={handleLogout}>Logout</Link> : <></>}
+          { auth ? <Link onClick={handleLogout} className="text-red-600">Logout</Link> : <Link to="/login" className="text-green-600">Login</Link>}
           {/* navbar, Image Cart */}
           <Link to="/cart">
-            <div className="relative hover:scale-105 duration-300">
+            <div className="relative hover:scale-105 duration-300 flex items-center">
               <img className="w-6" src={cartImg} alt="cartImg" />
+              <MDBBadge className='ms-2'>{item.length}</MDBBadge>
             </div>
           </Link>
           {/* navbar, Image Login */}
-          
             <img
               className="w-8 h-8 rounded-full  hover:scale-105 duration-300"
               src="https://static.zerochan.net/Yae.Miko.full.3600626.jpg"

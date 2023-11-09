@@ -2,7 +2,7 @@ import { useState } from "react";
 import { HiArrowRight, HiArrowLeft } from "react-icons/hi";
 //framerMotion, untuk animasi
 import { motion } from "framer-motion";
-import { scaleDown, slideLeft, slideRight } from "../framerMotion";
+import { scaleDown, slideLeft, slideRight } from "../../framerMotion";
 
 const Banner = () => {
   //state untuk banner slider

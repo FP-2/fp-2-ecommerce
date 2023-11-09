@@ -6,6 +6,7 @@ import { viewportScaleDownFadeUp } from "../framerMotion";
 import { useNavigate } from "react-router";
 
 const ProductsCard = ({ product }) => {
+  const auth = JSON.parse(localStorage.getItem("auth"));
   const navigate = useNavigate();
 
   //variabel _id mengambil dari product.title (dari fetch api)
@@ -62,12 +63,14 @@ const ProductsCard = ({ product }) => {
             </div>
 
             {/* menampilkan text "add to cart" */}
-            <p className="absolute z-20 w-[100px] text-gray-500 hover:text-gray-900 flex items-center gap-1 top-0 transform -translate-x-32 group-hover:translate-x-0 transition-transform cursor-pointer duration-300">
+            {auth ?
+            <p  className="absolute z-20 w-[100px] text-gray-500 hover:text-gray-900 flex items-center gap-1 top-0 transform -translate-x-32 group-hover:translate-x-0 transition-transform cursor-pointer duration-300">
               add to cart
               <span>
                 <BsArrowRight />
               </span>
             </p>
+            :<></>}
           </div>
         </div>
 
@@ -80,7 +83,7 @@ const ProductsCard = ({ product }) => {
         <div className="absolute top-4 right-0">
           {product.isNew && (
             <p className="bg-black text-white font-semibold font-tittleFont px-6 py-1">
-              Sale
+              New
             </p>
           )}
         </div>

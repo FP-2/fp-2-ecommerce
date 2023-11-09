@@ -1,23 +1,16 @@
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import Banner from "../components/Banner";
-import Products from "../components/Products";
-import { fetchProducts } from "../redux/productSlice";
+import Banner from "../components/ecommerce/Banner";
+import Category from "../components/ecommerce/Category";
+import News from "../components/News";
 
 const Ecommerce = () => {
-  const products = useSelector((state) => state.product.productData);
-  const dispatch = useDispatch();
-
-  //useEffects, untuk set products dari dataLoader yang telah di ambil
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
   return (
     <div>
       {/* menampilkan banner */}
       <Banner />
-      {/* menampilkan Product, props product untuk mengirim fetch ke components "Products" */}
-      <Products product={products} />
+      {/* Menampilkan Product terbaru */}
+      <News/>
+      {/* menampilkan Product */}
+      <Category/>
     </div>
   );
 };
