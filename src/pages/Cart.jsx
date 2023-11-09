@@ -7,7 +7,6 @@ import { viewportSlideRight } from "../framerMotion";
 import { useEffect } from "react";
 
 function Cart() {
-
   const cartItems = useSelector((state) => state.product.items);
   //Pemanggilan state cart untuk menampilkan data yang dimasukkan kedalam cart
   
