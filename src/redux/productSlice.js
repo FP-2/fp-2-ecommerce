@@ -32,10 +32,12 @@ export const productSlice = createSlice({
       state.error = action.payload;
     },
     addToCart: (state, action) => {
-      state.items.push(action.payload); // Menambahkan produk ke keranjang
+      state.items.push(action.payload); 
+      localStorage.setItem('cartItems', JSON.stringify(state.items));
     },
     removeFromCart: (state, action) => {
-      state.items = state.items.filter(item => item.id !== action.payload.id); // Menghapus produk dari keranjang
+      state.items = state.items.filter(item => item._id !== action.payload._id); 
+      localStorage.setItem('cartItems', JSON.stringify(state.items));
     },
   },
 });
