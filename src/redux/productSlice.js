@@ -3,6 +3,7 @@ import { productsData } from "../api/Api";
 
 const initialState = {
   productData: [],
+  items: [],
   userInfo: null,
   loading: false,
   error: null,
@@ -30,6 +31,14 @@ export const productSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    addToCart: (state, action) => {
+      state.items.push(action.payload); 
+      localStorage.setItem('cartItems', JSON.stringify(state.items));
+    },
+    removeFromCart: (state, action) => {
+      state.items = state.items.filter(item => item._id !== action.payload._id); 
+      localStorage.setItem('cartItems', JSON.stringify(state.items));
+    },
   },
 });
 
@@ -39,6 +48,8 @@ export const {
   fetchProductsStart,
   fetchProductsSuccess,
   fetchProductsFailure,
+  addToCart,
+  removeFromCart,
 } = productSlice.actions;
 
 export default productSlice.reducer;

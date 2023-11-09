@@ -51,13 +51,13 @@ const Login = () => {
                         icon: "success"
                     })
                 })
-                .catch(err => {
-                    Swal.fire({
-                        title: "Login Error",
-                        text: "Username/Password wrong or something wrong",
-                        icon: "error"
-                    })
-                })
+                // .catch(err => {
+                //     Swal.fire({
+                //         title: "Login Error",
+                //         text: "Username/Password wrong or something wrong",
+                //         icon: "error"
+                //     })
+                // })
         }
         setUsername("");
         setPassword("");
