@@ -11,6 +11,7 @@ import Shop from "./pages/Shop";
 import Login from "./pages/Login";
 import Footer from "./components/Footer";
 import ProductDetails from "./components/ProductsDetails";
+import './index.css';
 
 
 const Layout = () => {

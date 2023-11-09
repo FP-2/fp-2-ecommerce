@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.bg-hoodie{
+    background-image: url('./assets/hoodie.jpg');
+    background-size: cover;
+}
+.bg-jacket{
+    background-image: url('./assets/jacket.jpg');
+    background-size: cover;
+}
+.bg-t-shirt{
+    background-image: url('./assets/t-shirt.jpg');
+    background-size: cover;
+}

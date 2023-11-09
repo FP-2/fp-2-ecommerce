@@ -1,5 +1,6 @@
 import Banner from "../components/ecommerce/Banner";
 import Category from "../components/ecommerce/Category";
+import Type from "../components/ecommerce/Type";
 import News from "../components/News";
 
 const Ecommerce = () => {
@@ -7,9 +8,11 @@ const Ecommerce = () => {
     <div>
       {/* menampilkan banner */}
       <Banner />
+      {/* Menampilkan Jenis Product */}
+      <Type/>
       {/* Menampilkan Product terbaru */}
       <News/>
-      {/* menampilkan Product */}
+      {/* menampilkan Kategori */}
       <Category/>
     </div>
   );
