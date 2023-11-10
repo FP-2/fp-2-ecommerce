@@ -1,13 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { productsData } from "../api/Api";
 
+const savedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
 const initialState = {
   productData: [],
-  items: [],
+  items: savedCartItems,
   userInfo: null,
   loading: false,
   error: null,
-  count: 0,
+  // count: 0,
 };
 
 export const productSlice = createSlice({
@@ -20,9 +21,9 @@ export const productSlice = createSlice({
     setUserInfo: (state, action) => {
       state.userInfo = action.payload;
     },
-    setBadges: (state) => {
-      state.count = JSON.parse(localStorage.getItem("cartItems"))?.length || 0;
-    },
+    // setBadges: (state) => {
+    //   state.count = JSON.parse(localStorage.getItem("cartItems"))?.length || 0;
+    // },
     fetchProductsStart: (state) => {
       state.loading = true;
       state.error = null;
@@ -38,16 +39,35 @@ export const productSlice = createSlice({
     addToCart: (state, action) => {
       const item = state.items.find((item) => item._id === action.payload._id);
       if (item) {
-        item.quantity += action.payload.quantity;
+        item.quantity = action.payload.quantity;
       } else {
         state.items.push(action.payload);
       }
       localStorage.setItem("cartItems", JSON.stringify(state.items));
     },
     removeFromCart: (state, action) => {
-      state.items = state.items.filter(
-        (item) => item._id !== action.payload._id
-      );
+      state.items = state.items.filter((item) => item._id !== action.payload);
+
+      localStorage.setItem("cartItems", JSON.stringify(state.items));
+    },
+    resetCart: (state) => {
+      state.items = [];
+      localStorage.setItem("cartItems", JSON.stringify(state.items));
+    },
+    incrementQuantity: (state, action) => {
+      const item = state.items.find((item) => item._id === action.payload._id);
+      if (item) {
+        item.quantity++;
+      }
+      localStorage.setItem("cartItems", JSON.stringify(state.items));
+    },
+    decrementQuantity: (state, action) => {
+      const item = state.items.find((item) => item._id === action.payload._id);
+      if (item.quantity === 1) {
+        item.quantity = 1;
+      } else {
+        item.quantity--;
+      }
       localStorage.setItem("cartItems", JSON.stringify(state.items));
     },
   },
@@ -61,7 +81,10 @@ export const {
   fetchProductsFailure,
   addToCart,
   removeFromCart,
-  setBadges,
+  // setBadges,
+  resetCart,
+  incrementQuantity,
+  decrementQuantity,
 } = productSlice.actions;
 
 export default productSlice.reducer;

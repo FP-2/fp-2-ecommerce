@@ -13,17 +13,19 @@ const News = () => {
   }, [dispatch]);
   return (
     <div className="max-w-screen-xl mx-auto py-10 grid grid-cols-4">
-    <div>
+      <div>
         <div className="text-2xl">New Products</div>
         <div>We have made a selection of our customers early products</div>
-    </div>
-    {products.slice(0,3).map((item)=>{
-    if(item.isNew === true){
-    return(
-        <div key={item._id}>
-        <ProductsCard product={item} />
-        </div>
-    )}})}
+      </div>
+      {products.slice(0, 3).map((item) => {
+        if (item.isNew === true) {
+          return (
+            <div key={item._id}>
+              <ProductsCard product={item} />
+            </div>
+          );
+        }
+      })}
     </div>
   );
 };
