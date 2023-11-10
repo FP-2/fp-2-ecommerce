@@ -3,20 +3,11 @@ import { useEffect, useState } from "react";
 import CartItem from "../components/CartItems";
 import { motion } from "framer-motion";
 import { scaleDown, slideLeft } from "../framerMotion";
-import { useLocation } from "react-router-dom";
 
 const Cart = () => {
   const item = useSelector((state) => state.product.items);
   const [totalAmount, setTotalAmount] = useState("");
   const isLoggedIn = localStorage.getItem("auth") !== null;
-  const location = useLocation();
-
-  // auto scroll to top
-  useEffect(() => {
-    if (location.pathname === "/cart") {
-      window.scrollTo(0, 0);
-    }
-  }, [location]);
 
   //menampilkan harga
   useEffect(() => {

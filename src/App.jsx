@@ -1,4 +1,9 @@
-import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  Outlet,
+  RouterProvider,
+  ScrollRestoration,
+  createBrowserRouter,
+} from "react-router-dom";
 import Header from "./components/Header";
 import Ecommerce from "./pages/Ecommerce";
 import Cart from "./pages/Cart";
@@ -14,6 +19,7 @@ const Layout = () => {
       {/* bagian header navbar */}
       <Header />
       {/* bagian isi, bagian "children" di router bawah */}
+      <ScrollRestoration />
       <Outlet />
       {/* bagian Footer */}
       <Footer />

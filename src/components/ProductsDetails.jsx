@@ -14,13 +14,6 @@ const ProductDetails = () => {
   const [productDetails, setProductDetails] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // auto scroll to top
-  useEffect(() => {
-    if (location.pathname.includes("/productdetails/")) {
-      window.scrollTo(0, 0);
-    }
-  }, [location]);
-
   //useEffects, untuk mengolah data ke setProductDetails yang telah di akses oleh useLocation yaitu berupa item (varibel yang sebelumnya telah di buat pada (/productsCrad) yang membawa data fetch "products",)
   useEffect(() => {
     setProductDetails(location.state.item);
