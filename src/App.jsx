@@ -40,6 +40,11 @@ const router = createBrowserRouter([
         element: <Ecommerce />,
       },
       {
+        path: "/admin",
+        //Home ecommerce
+        element: <Ecommerce />,
+      },
+      {
         path: "/productdetails/:id",
         //page Product Details
         element: <ProductDetails />,

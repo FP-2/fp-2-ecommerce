@@ -39,6 +39,31 @@ export const productSlice = createSlice({
       state.items.push(action.payload); 
       localStorage.setItem('cartItems', JSON.stringify(state.items));
     },
+    addToCheckout: (state) => {
+      let idx = -1;
+      state.cart.forEach((item) => {
+        if (item.cartQuantity >= 1) {
+          const isProductFound = state.checkout.some((data, dataIdx) => {
+            if (data.id === item.id) {
+              idx = dataIdx;
+              return true;
+            }
+            return false;
+          });
+
+          if (isProductFound)
+            state.checkout[idx].sold += parseInt(item.cartQuantity);
+          else state.checkout.push({ ...item, sold: item.cartQuantity });
+
+          state.products.forEach((product, productIdx) => {
+            if (product.id === item.id)
+              state.products[productIdx].quantity -= item.cartQuantity;
+          });
+        }
+      });
+
+      state.cart = [];
+    },
     removeFromCart: (state, action) => {
       state.items = state.items.filter(item => item._id !== action.payload._id); 
       localStorage.setItem('cartItems', JSON.stringify(state.items));
