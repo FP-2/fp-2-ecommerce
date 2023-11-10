@@ -69,18 +69,24 @@ const Header = () => {
           {/* navbar login,logout */}
           { auth ? <Link onClick={handleLogout} className="text-red-600">Logout</Link> : <Link to="/login" className="text-green-600">Login</Link>}
           {/* navbar, Image Cart */}
-          <Link to="/cart">
-            <div className="relative hover:scale-105 duration-300 flex items-center">
-              <img className="w-6" src={cartImg} alt="cartImg" />
-              <MDBBadge className='ms-2'>{item}</MDBBadge>
-            </div>
-          </Link>
-          {/* navbar, Image Login */}
-            <img
-              className="w-8 h-8 rounded-full  hover:scale-105 duration-300"
-              src="https://static.zerochan.net/Yae.Miko.full.3600626.jpg"
-              alt="userLogo"
-            />
+          {
+            auth ?
+            <Link to="/cart">
+              <div className="relative hover:scale-105 duration-300 flex items-center">
+                <img className="w-6" src={cartImg} alt="cartImg" />
+                <MDBBadge className='ms-2'>{item}</MDBBadge>
+              </div>
+            </Link>
+              :<></>
+            }
+            {/* navbar, Image Login */}
+            {auth?
+              <img
+                className="w-8 h-8 rounded-full  hover:scale-105 duration-300"
+                src="https://static.zerochan.net/Yae.Miko.full.3600626.jpg"
+                alt="userLogo"
+              />:<></>
+            }
           
         </div>
       </div>

@@ -7,12 +7,13 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { addToCart,setBadges } from "../redux/productSlice";
 import { useLocation } from "react-router";
+import { auth } from "../api/Api";
 
 const ProductsCard = ({ product }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-
+  const auth = JSON.parse(localStorage.getItem("auth"));
   // Mendapatkan lokasi path saat ini
   const currentPath = location.pathname;
   const textCard = currentPath.includes('/cart') ? 'Checkout' : 'Add to Cart';
@@ -79,13 +80,14 @@ const ProductsCard = ({ product }) => {
             </div>
 
             {/* menampilkan text "add to cart" */}
-
+            {auth?
             <p onClick={handleAddToCart} className="absolute z-20 w-[100px] text-gray-500 hover:text-gray-900 flex items-center gap-1 top-0 transform -translate-x-32 group-hover:translate-x-0 transition-transform cursor-pointer duration-300">
               {textCard}
               <span >
                 <BsArrowRight />
               </span>
-            </p>
+            </p>:<></>
+            }
           </div>
         </div>
 
