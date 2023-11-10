@@ -7,7 +7,6 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { addToCart,setBadges } from "../redux/productSlice";
 import { useLocation } from "react-router";
-import { auth } from "../api/Api";
 
 const ProductsCard = ({ product }) => {
   const navigate = useNavigate();
