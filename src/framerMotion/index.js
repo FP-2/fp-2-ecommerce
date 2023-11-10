@@ -21,6 +21,18 @@ export const viewportScaleDownFadeUp = {
     visible: { opacity: 1, scale: 1, y: 0 },
   },
 };
+
+export const viewportScaleDown = {
+  initial: "hidden",
+  whileInView: "visible",
+  viewport: { once: true, amount: 0.2 },
+  transition: transition1,
+  variants: {
+    hidden: { opacity: 0, scale: 1.1 },
+    visible: { opacity: 1, scale: 1 },
+  },
+};
+
 export const viewportSlideRight = {
   initial: "hidden",
   whileInView: "visible",

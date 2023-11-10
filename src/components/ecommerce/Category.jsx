@@ -16,36 +16,40 @@ const Category = () => {
   return (
     <div>
       <div className="max-w-screen-xl mx-auto py-10 grid grid-cols-4">
-      {products.map((item) =>{    
-      if(item.category === 'men'){
-      if(countMan < 3 ){
-        countMan++;
-        return(
-        <div key={item._id}>
-            <ProductsCard product={item} />
-          </div>
-        )
-      }}})}
-      <div className="mx-5">
+        {products.map((item) => {
+          if (item.category === "men") {
+            if (countMan < 3) {
+              countMan++;
+              return (
+                <div key={item._id}>
+                  <ProductsCard product={item} />
+                </div>
+              );
+            }
+          }
+        })}
+        <div className="mx-5">
           <div className="text-2xl">Mens Product</div>
           <div>Elevate Your Style with Our Mens Collection!</div>
-      </div>
+        </div>
       </div>
       <div className="max-w-screen-xl mx-auto py-10 grid grid-cols-4">
-      <div className="mx-5">
+        <div className="mx-5">
           <div className="text-2xl">Womens Product</div>
           <div>Unleash Your Inner Fashionista with Our Womens Apparel!</div>
-      </div>
-      {products.map((item) =>{    
-      if(item.category === 'women' && item.isNew === false){
-      if(countWomen < 3 ){
-        countWomen++;
-        return(
-        <div key={item._id}>
-            <ProductsCard product={item} />
-          </div>
-        )
-      }}})}
+        </div>
+        {products.map((item) => {
+          if (item.category === "women" && item.isNew === false) {
+            if (countWomen < 3) {
+              countWomen++;
+              return (
+                <div key={item._id}>
+                  <ProductsCard product={item} />
+                </div>
+              );
+            }
+          }
+        })}
       </div>
     </div>
   );
