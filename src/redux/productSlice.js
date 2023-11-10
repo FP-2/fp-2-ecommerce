@@ -41,7 +41,7 @@ export const productSlice = createSlice({
       if (item) {
         item.quantity = action.payload.quantity;
       } else {
-        state.items.push(action.payload);
+        state.items.unshift(action.payload);
       }
       localStorage.setItem("cartItems", JSON.stringify(state.items));
     },
