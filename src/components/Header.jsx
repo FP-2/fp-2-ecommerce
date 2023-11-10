@@ -3,33 +3,46 @@ import Swal from "sweetalert2";
 import { cartImg } from "../assets";
 import { MDBBadge } from "mdb-react-ui-kit";
 // import { setBadges } from "../redux/productSlice";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { setBadges } from "../redux/productSlice";
 
 const Header = () => {
   const navigate = useNavigate();
   const auth = JSON.parse(localStorage.getItem("auth"));
   const item = useSelector(state => state.product.count);
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    const storedCartItems = JSON.parse(localStorage.getItem('countItems')) || [];
+    // Ambil data dari local storage
 
-    const handleLogout = () => {
-        Swal.fire({
-            title: "Are you sure to logout?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, Logout!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                localStorage.removeItem("auth");
-                navigate("/login");
-                Swal.fire({
-                    title: "Logout Success",
-                    icon: "success"
-                });
-            }
-        });
-    };
+    if (item === 0 && storedCartItems > 0) {
+      // Jika Redux store kosong dan local storage memiliki data, isi Redux store dengan data dari local storage
+      dispatch(setBadges(storedCartItems));
+    }
+  }, [dispatch, item]);
+  const handleLogout = () => {
+      Swal.fire({
+          title: "Are you sure to logout?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, Logout!"
+      }).then((result) => {
+          if (result.isConfirmed) {
+              localStorage.removeItem("auth");
+              navigate("/login");
+              Swal.fire({
+                  title: "Logout Success",
+                  icon: "success"
+              });
+          }
+      });
+  };
+  
+
 
   return (
     <div className="shadow-lg w-full h-20 bg-white border-b-[1px] font-tittleFont sticky top-0 z-50">

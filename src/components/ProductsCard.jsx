@@ -6,13 +6,23 @@ import { viewportScaleDownFadeUp } from "../framerMotion";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { addToCart,setBadges } from "../redux/productSlice";
+import { useLocation } from "react-router";
 
 const ProductsCard = ({ product }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
+
+  // Mendapatkan lokasi path saat ini
+  const currentPath = location.pathname;
+  const textCard = currentPath.includes('/cart') ? 'Checkout' : 'Add to Cart';
   const handleAddToCart = () => {
-    dispatch(addToCart(product));
-    dispatch(setBadges());
+    if(currentPath.includes('/cart')){
+      dispatch(addToCart(product));
+    }else{
+      dispatch(addToCart(product));
+      dispatch(setBadges());
+    }
   };
 
   //variabel _id mengambil dari product.title (dari fetch api)
@@ -71,7 +81,7 @@ const ProductsCard = ({ product }) => {
             {/* menampilkan text "add to cart" */}
 
             <p onClick={handleAddToCart} className="absolute z-20 w-[100px] text-gray-500 hover:text-gray-900 flex items-center gap-1 top-0 transform -translate-x-32 group-hover:translate-x-0 transition-transform cursor-pointer duration-300">
-              add to cart
+              {textCard}
               <span >
                 <BsArrowRight />
               </span>

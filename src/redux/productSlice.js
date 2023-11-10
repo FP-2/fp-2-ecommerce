@@ -8,6 +8,7 @@ const initialState = {
   loading: false,
   error: null,
   count:0,
+  quantity:1,
 };
 
 export const productSlice = createSlice({
@@ -22,6 +23,10 @@ export const productSlice = createSlice({
     },
     setBadges : (state) =>{
       state.count = JSON.parse(localStorage.getItem('cartItems'))?.length || 0;
+      localStorage.setItem('countItems', JSON.stringify(state.count));
+    },
+    setQuantity : (state, action) =>{
+      state.count = action.payload;
     },
     fetchProductsStart: (state) => {
       state.loading = true;
@@ -55,6 +60,7 @@ export const {
   addToCart,
   removeFromCart,
   setBadges,
+  setQuantity,
 } = productSlice.actions;
 
 export default productSlice.reducer;

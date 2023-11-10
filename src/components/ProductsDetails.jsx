@@ -4,12 +4,11 @@ import { MdOutlineStar } from "react-icons/md";
 //framer motion, untuk animasi
 import { motion } from "framer-motion";
 import { slideDown, slideLeft } from "../framerMotion";
-
 const ProductDetails = () => {
   //location, untuk mengakses data yang telah di kirimkan melalui navigasi dari halaman sebelumnya yaitu state yang dikirimkan dari (/products card)
   const location = useLocation();
   //state, untuk quantity
-  let [quantity, setQuantity] = useState(1);
+  let [quantity, setQuantitys] = useState(1);
   const [productDetails, setProductDetails] = useState({});
 
   //useEffects, untuk mengolah data ke setProductDetails yang telah di akses oleh useLocation yaitu berupa item (varibel yang sebelumnya telah di buat pada (/productsCrad) yang membawa data fetch "products",)
@@ -75,7 +74,7 @@ const ProductDetails = () => {
                 {/* button - (minnus) mengurangi quantity */}
                 <button
                   onClick={() =>
-                    setQuantity(quantity === 1 ? (quantity = 1) : quantity - 1)
+                    setQuantitys(quantity === 1 ? (quantity = 1) : quantity - 1)
                   }
                   className="border h-5 font-normal text-lg flex items-center justify-center px-2 hover:bg-gray-700 hover:text-white cursor-pointer duration-300 active:bg-black"
                 >
@@ -84,7 +83,7 @@ const ProductDetails = () => {
                 <span>{quantity}</span>
                 {/* button +(plus) menambahkan quantity */}
                 <button
-                  onClick={() => setQuantity(quantity + 1)}
+                  onClick={() => setQuantitys(quantity + 1)}
                   className="border h-5 font-normal text-lg flex items-center justify-center px-2 hover:bg-gray-700 hover:text-white cursor-pointer duration-300 active:bg-black"
                 >
                   +

@@ -8,8 +8,8 @@ import { useEffect } from "react";
 
 function Cart() {
   const cartItems = useSelector((state) => state.product.items);
+  const quantityItems = useSelector((state) => state.product.quantity);
   //Pemanggilan state cart untuk menampilkan data yang dimasukkan kedalam cart
-  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -39,11 +39,17 @@ function Cart() {
           </h2>
         </motion.div>
       </div>
-      <div className="max-w-screen-xl mx-auto py-10 grid grid-cols-4 gap-10">
+      <div className="max-w-screen-xl mx-auto py-10 grid grid-cols-2 gap-10">
       {cartItems.map((item) => (
-        <div key={item._id}>
+        <div key={item._id} className="flex flex-row">
           <ProductsCard product={item} />
-          <button onClick={() => handleRemoveFromCart(item)}>Hapus dari Keranjang</button>
+            <div className="ml-5 flex flex-col justify-center">
+              <div>Quantity : {quantityItems}</div>
+              <div>Total : ${item.price*quantityItems}</div>
+            </div>
+          <div className="flex mb-10 flex-col items-center justify-end">
+            <button onClick={() => handleRemoveFromCart(item)} className="text-red-600">Hapus dari Keranjang</button>
+          </div>
         </div>
       ))}
       </div>
