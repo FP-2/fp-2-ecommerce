@@ -1,13 +1,31 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import CartItem from "../components/CartItems";
 import { motion } from "framer-motion";
 import { scaleDown, slideLeft } from "../framerMotion";
+import { fetchAdmin, fetchTotal, fetchUser, resetCart } from "../redux/productSlice";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
 const Cart = () => {
   const item = useSelector((state) => state.product.items);
+  const navigate = useNavigate();
   const [totalAmount, setTotalAmount] = useState("");
   const isLoggedIn = localStorage.getItem("auth") !== null;
+  const user = JSON.parse(localStorage.getItem("auth")) || [];
+  const dispatch = useDispatch();
+  console.log(user.usernameUser)
+  const handleCheckout = () => {
+    dispatch(fetchUser(user.usernameUser));
+    dispatch(fetchTotal(totalAmount));
+    dispatch(fetchAdmin(item));
+    dispatch(resetCart());
+    navigate("/cart");
+    Swal.fire({
+        title: "Barang berhasil di checkout",
+        icon: "success"
+    })
+  }
 
   //menampilkan harga
   useEffect(() => {
@@ -43,13 +61,6 @@ const Cart = () => {
                   ${"0"}
                 </span>
               </p>
-              <p className="flex items-start gap-4 text-base">
-                Shipping{""}
-                <span>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Illum earum aliquid quia placeat repellat veritatis?
-                </span>
-              </p>
             </div>
             <p className="font-tittleFont font-semibold flex justify-between mt-6">
               Total <span className="text-xl font-bold">${"0"}</span>
@@ -68,18 +79,11 @@ const Cart = () => {
                   ${totalAmount}
                 </span>
               </p>
-              <p className="flex items-start gap-4 text-base">
-                Shipping{" "}
-                <span>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Illum earum aliquid quia placeat repellat veritatis?
-                </span>
-              </p>
             </div>
             <p className="font-tittleFont font-semibold flex justify-between mt-6">
               Total <span className="text-xl font-bold">${totalAmount}</span>
             </p>
-            <button className="text-base bg-black text-white w-full py-3 mt-6 hover:bg-gray-800 duration-300">
+            <button onClick={handleCheckout} className="text-base bg-black text-white w-full py-3 mt-6 hover:bg-gray-800 duration-300">
               proceed to checkout
             </button>
           </motion.div>

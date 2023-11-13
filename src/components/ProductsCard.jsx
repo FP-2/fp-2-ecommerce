@@ -8,26 +8,11 @@ import { addToCart } from "../redux/productSlice";
 import Swal from "sweetalert2";
 import { useEffect } from "react";
 import { useState } from "react";
-// import { addToCart, setBadges } from "../redux/productSlice";
-// import { useLocation } from "react-router";
 
 const ProductsCard = ({ product }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // const location = useLocation();
-
-  // // Mendapatkan lokasi path saat ini
-  // const currentPath = location.pathname;
-  // const textCard = currentPath.includes("/cart") ? "Checkout" : "Add to Cart";
-  // const handleAddToCart = () => {
-  //   if (currentPath.includes("/cart")) {
-  //     dispatch(addToCart(product));
-  //   } else {
-  //     dispatch(addToCart(product));
-  //     dispatch(setBadges());
-  //   }
-  // };
 
   //mengambil product.title dari api dan di untuk di ubah menjadi id dengan variable _id
   const _id = product.title;

@@ -12,6 +12,7 @@ import Login from "./pages/Login";
 import Footer from "./components/Footer";
 import ProductDetails from "./components/ProductsDetails";
 import "./index.css";
+import Admin from "./pages/Admin";
 
 const Layout = () => {
   return (
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Ecommerce />,
+      },
+      {
+        path: "/admin",
+        element: <Admin />,
       },
       {
         path: "/productdetails/:id",

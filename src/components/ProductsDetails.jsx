@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import { MdOutlineStar } from "react-icons/md";
 import { motion } from "framer-motion";
 import { slideDown, slideLeft } from "../framerMotion";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../redux/productSlice";
+import { addToCart, resetQuantity } from "../redux/productSlice";
 import Swal from "sweetalert2";
 const ProductDetails = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   //location, untuk mengakses data yang telah di kirimkan melalui navigasi dari halaman sebelumnya yaitu state yang dikirimkan dari (/products card)
   const location = useLocation();
   let [quantity, setQuantitys] = useState(1);
@@ -18,6 +19,7 @@ const ProductDetails = () => {
   useEffect(() => {
     setProductDetails(location.state.item);
   }, [location.state.item]);
+  // const authen = localStorage.getItem("auth") ;
 
   // Fungsi untuk mengecek status login
   const checkLoginStatus = () => {
@@ -25,6 +27,16 @@ const ProductDetails = () => {
     if (auth) {
       setIsLoggedIn(true);
     }
+  };
+  const handleReset = () =>{
+    dispatch(resetQuantity())
+  }
+  const handleStok = () => {
+      navigate("/");
+      Swal.fire({
+          title: "Stok Habis",
+          icon: "error"
+      })
   };
 
   useEffect(() => {
@@ -97,6 +109,7 @@ const ProductDetails = () => {
             {productDetails.description}
           </p>
           <div className="flex gap-4">
+            {isLoggedIn ?(<>
             <div className="w-72 flex items-center justify-between text-gray-500 gap-4 border p-3">
               <p className="text-sm">Quantity</p>
               <div className="flex items-center gap-4 text-sm font-semibold">
@@ -110,7 +123,7 @@ const ProductDetails = () => {
                 </button>
                 <div className="w-3">{quantity}</div>
                 <button
-                  onClick={() => setQuantitys(quantity + 1)}
+                  onClick={() => setQuantitys(quantity === productDetails.quantity ? (handleStok()):(quantity + 1))}
                   className="border h-5 font-normal text-lg flex items-center justify-center px-2 hover:bg-gray-700 hover:text-white cursor-pointer duration-300 active:bg-black"
                 >
                   +
@@ -118,11 +131,27 @@ const ProductDetails = () => {
               </div>
             </div>
             <button
-              onClick={handleAddToCart}
+              onClick={handleAddToCart()}
               className="bg-black text-white py-3 px-6 active:bg-gray-800"
             >
               add to cart
             </button>
+            </>
+            ):(<>
+              <div className="w-72 flex items-center justify-between text-gray-500 gap-4 border p-3">
+              <p className="text-sm">remaining stock</p>
+              <div className="flex items-center gap-4 text-sm font-semibold">
+                <div className="w-3">{productDetails.quantity}</div>
+              </div>
+              </div>
+              <button
+              onClick={handleReset()}
+              className="bg-black text-white py-3 px-6 active:bg-gray-800"
+            >
+              reset quantity
+            </button>
+            </>
+            )}
           </div>
           <p className="text-base text-gray-500">
             Category:{" "}

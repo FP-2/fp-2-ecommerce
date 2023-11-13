@@ -9,18 +9,8 @@ import { useSelector } from "react-redux";
 const Header = () => {
   const navigate = useNavigate();
   const auth = JSON.parse(localStorage.getItem("auth"));
+  const admin = JSON.parse(localStorage.getItem("authAdmin"));
   const item = useSelector((state) => state.product.items);
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   const storedCartItems = JSON.parse(localStorage.getItem('countItems')) || [];
-  //   // Ambil data dari local storage
-
-  //   if (item === 0 && storedCartItems > 0) {
-  //     // Jika Redux store kosong dan local storage memiliki data, isi Redux store dengan data dari local storage
-  //     dispatch(setBadges(storedCartItems));
-  //   }
-  // }, [dispatch, item]);
   const handleLogout = () => {
     Swal.fire({
       title: "Are you sure to logout?",
@@ -31,7 +21,7 @@ const Header = () => {
       confirmButtonText: "Yes, Logout!",
     }).then((result) => {
       if (result.isConfirmed) {
-        localStorage.removeItem("auth");
+        localStorage.removeItem("auth") || localStorage.removeItem("authAdmin");
         navigate("/login");
         Swal.fire({
           title: "Logout Success",
@@ -60,13 +50,31 @@ const Header = () => {
               <Link to="/shop">Shop</Link>
             </li>
           </ul>
-          {auth ? (
+          {auth || admin ? (
+          <>
+            {admin ?(
+            <div className="text-base text-black font-bold hover:text-orange-900 underdivne-offset-2 decoration-[1px] cursor-pointer hover:scale-105 duration-300">
+              <Link to="/admin">Admin</Link>
+            </div>
+            ):(<>
+            <Link to="/cart">
+              <div className="relative hover:scale-105 duration-300 flex items-center">
+                <img className="w-6" src={cartImg} alt="cartImg" />
+                {auth ? (
+                  <MDBBadge className="ms-2">{item.length}</MDBBadge>
+                ) : (
+                  <MDBBadge className="ms-2">{""}</MDBBadge>
+                )}
+              </div>
+            </Link>
+            </>)}
             <div
               onClick={handleLogout}
               className="text-base font-bold hover:text-red-800 underline-offset-2 decoration-[1px] cursor-pointer hover:scale-105 duration-300 text-red-600"
             >
               Logout
             </div>
+          </>
           ) : (
             <Link
               to="/login"
@@ -75,16 +83,6 @@ const Header = () => {
               Login
             </Link>
           )}
-          <Link to="/cart">
-            <div className="relative hover:scale-105 duration-300 flex items-center">
-              <img className="w-6" src={cartImg} alt="cartImg" />
-              {auth ? (
-                <MDBBadge className="ms-2">{item.length}</MDBBadge>
-              ) : (
-                <MDBBadge className="ms-2">{""}</MDBBadge>
-              )}
-            </div>
-          </Link>
           {/* <img
             className="w-8 h-8 rounded-full  hover:scale-105 duration-300"
             src="https://static.zerochan.net/Yae.Miko.full.3600626.jpg"
