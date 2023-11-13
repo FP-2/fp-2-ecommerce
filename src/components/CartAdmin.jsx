@@ -1,10 +1,23 @@
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { slideDown } from "../framerMotion";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const CartAdmin = () => {
   const item = useSelector((state) => state.product.checkout);
   const isLoggedIn = localStorage.getItem("authAdmin") !== null;
+  const navigate = useNavigate();
+  const handleAdmin = () => {
+    Swal.fire({
+      title: "Maaf anda bukan admin",
+      icon: "error"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("/login");
+      }
+    });
+  }
   return (
     <motion.div {...slideDown}>
       <div className="w-full">
@@ -14,11 +27,8 @@ const CartAdmin = () => {
         </h2>
         ))}
       </div>
-      {!isLoggedIn ? (
-        <div className="flex items-center justify-center w-full py-24">
-          <p className="pt-4">Please login to view your cart.</p>
-        </div>
-      ) : item.length === 0 ? (
+      {!isLoggedIn ? (handleAdmin())
+      : item.length === 0 ? (
         <div className="flex items-center justify-center w-full py-24">
           <p className="pt-4">Your Cart Is Empty!!</p>
         </div>
@@ -26,7 +36,7 @@ const CartAdmin = () => {
         <div>
         <table>
         <thead>
-        <tr className="flex mx-4 items-center justify-between gap-2 mt-6">
+        <tr className="flex  items-center justify-between mt-6">
             <th>Date</th>
             <th>Preview</th>
             <th>Product</th>
@@ -37,7 +47,7 @@ const CartAdmin = () => {
         </thead>
           {item.map((item,index) => (
             <tbody key={index}>
-            <tr className="flex mx-6 items-center justify-between gap-6 mt-6">
+            <tr className="flex text-left items-center justify-start gap-x-32 mt-6">
                 <td>{item.date}</td>
                 <td>
                 <div className="flex items-center gap-2">
@@ -48,8 +58,8 @@ const CartAdmin = () => {
                 />
                 </div>
                 </td>
-                <td><h2 className="w-52">{item.title}</h2></td>
-                <td><p className="w-10">${item.price}</p></td>
+                <td><h2 className="w-28">{item.title}</h2></td>
+                <td><p className="w-16">${item.price}</p></td>
                 <td>              
                 <div className="w-16 flex items-center justify-center text-gray-500 gap-4 border p-3">
                   <div className="w-2">{item.quantity}</div>

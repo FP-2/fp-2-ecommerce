@@ -1,11 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { productsData } from "../api/Api";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const savedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
 const checkoutItems = JSON.parse(localStorage.getItem("checkoutItems")) || [];
 const dataProduct = JSON.parse(localStorage.getItem("productData")) || [];
 const today = new Date();
+const navigate = useNavigate;
 const day = today.getDay();
 const daysOfWeek = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
 const now = daysOfWeek[day];
@@ -38,12 +40,23 @@ export const productSlice = createSlice({
     fetchQuantity : (state,action)=>{
       state.quantity = action.payload;
     },
-    resetQuantity : (state)=>{
-      state.quantity = 10;
-      // const item = state.productData.find((product) => product._id);
-      // console.log(item.quantity)
-      // localStorage.setItem("productData", JSON.stringify(item));
-    },
+    resetQuantity: (state, action) => {
+      console.log(action.payload)
+      dataProduct.map((item)=>{
+        if(item._id === action.payload._id){
+          item.quantity =10
+          Swal.fire({
+            title: "Sukses reset",
+            icon: "success"
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate("/shop");
+            }
+          });
+        }
+      })
+      localStorage.setItem("productData", JSON.stringify(dataProduct));
+    },    
     fetchProductsSuccess: (state, action) => {
       state.productData = action.payload;
       state.loading = false;

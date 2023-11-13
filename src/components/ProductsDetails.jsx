@@ -14,6 +14,7 @@ const ProductDetails = () => {
   let [quantity] = useState(0);
   const [productDetails, setProductDetails] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedInAdmin, setIsLoggedInAdmin] = useState(false);
 
   //useEffects, untuk mengolah data ke setProductDetails yang telah di akses oleh useLocation yaitu berupa item (varibel yang sebelumnya telah di buat pada (/productsCrad) yang membawa data fetch "products",)
   useEffect(() => {
@@ -24,12 +25,19 @@ const ProductDetails = () => {
   // Fungsi untuk mengecek status login
   const checkLoginStatus = () => {
     const auth = localStorage.getItem("auth");
+    const authAdmin = localStorage.getItem("authAdmin");
     if (auth) {
       setIsLoggedIn(true);
+    }else if (authAdmin) {
+      setIsLoggedInAdmin(true);
     }
   };
   const handleReset = () =>{
-    dispatch(resetQuantity())
+    dispatch(resetQuantity(
+      {
+        _id: productDetails._id,
+      }
+    ))
   }
   // const handleStok = () => {
   //     navigate("/");
@@ -44,7 +52,7 @@ const ProductDetails = () => {
   }, []);
 
   const handleAddToCart = () => {
-    if (isLoggedIn) {
+    if (isLoggedIn === true) {
       dispatch(
         addToCart({
           _id: productDetails._id,
@@ -131,7 +139,7 @@ const ProductDetails = () => {
               </div>
             </div> */}
             <button
-              onClick={handleAddToCart()}
+              onClick={handleAddToCart}
               className="bg-black text-white py-3 px-6 active:bg-gray-800"
             >
               add to cart
@@ -144,9 +152,9 @@ const ProductDetails = () => {
                 <div className="w-3">{productDetails.quantity}</div>
               </div>
               </div>
-              {isLoggedIn?(<>
+              {isLoggedInAdmin?(<>
               <button
-              onClick={handleReset()}
+              onClick={handleReset}
               className="bg-black text-white py-3 px-6 active:bg-gray-800"
             >
               reset quantity
