@@ -167,7 +167,7 @@ export const fetchProducts = () => async (dispatch) => {
       const response = await productsData();
       productData = response.data.map((product) => ({
         ...product,
-        quantity: 9,
+        quantity: 10,
       }));
       localStorage.setItem("productData", JSON.stringify(productData));
     }

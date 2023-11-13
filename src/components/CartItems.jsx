@@ -71,7 +71,7 @@ const CartItem = () => {
                   >
                     -
                   </button>
-                  <div className="w-3">{item.quantity}</div>
+                  <div className="w-3">{item.quantity === 0 ? (1):(item.quantity)}</div>
                   <button
                     onClick={() =>
                       dispatch(
