@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router";
+import { useLocation } from "react-router";
 import { MdOutlineStar } from "react-icons/md";
 import { motion } from "framer-motion";
 import { slideDown, slideLeft } from "../framerMotion";
@@ -8,10 +8,10 @@ import { addToCart, resetQuantity } from "../redux/productSlice";
 import Swal from "sweetalert2";
 const ProductDetails = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   //location, untuk mengakses data yang telah di kirimkan melalui navigasi dari halaman sebelumnya yaitu state yang dikirimkan dari (/products card)
   const location = useLocation();
-  let [quantity, setQuantitys] = useState(1);
+  let [quantity] = useState(1);
   const [productDetails, setProductDetails] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -31,13 +31,13 @@ const ProductDetails = () => {
   const handleReset = () =>{
     dispatch(resetQuantity())
   }
-  const handleStok = () => {
-      navigate("/");
-      Swal.fire({
-          title: "Stok Habis",
-          icon: "error"
-      })
-  };
+  // const handleStok = () => {
+  //     navigate("/");
+  //     Swal.fire({
+  //         title: "Stok Habis",
+  //         icon: "error"
+  //     })
+  // };
 
   useEffect(() => {
     checkLoginStatus();
@@ -110,7 +110,7 @@ const ProductDetails = () => {
           </p>
           <div className="flex gap-4">
             {isLoggedIn ?(<>
-            <div className="w-72 flex items-center justify-between text-gray-500 gap-4 border p-3">
+            {/* <div className="w-72 flex items-center justify-between text-gray-500 gap-4 border p-3">
               <p className="text-sm">Quantity</p>
               <div className="flex items-center gap-4 text-sm font-semibold">
                 <button
@@ -129,7 +129,7 @@ const ProductDetails = () => {
                   +
                 </button>
               </div>
-            </div>
+            </div> */}
             <button
               onClick={handleAddToCart()}
               className="bg-black text-white py-3 px-6 active:bg-gray-800"
@@ -144,12 +144,14 @@ const ProductDetails = () => {
                 <div className="w-3">{productDetails.quantity}</div>
               </div>
               </div>
+              {isLoggedIn?(<>
               <button
               onClick={handleReset()}
               className="bg-black text-white py-3 px-6 active:bg-gray-800"
             >
               reset quantity
             </button>
+              </>):(<></>)}
             </>
             )}
           </div>

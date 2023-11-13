@@ -83,7 +83,7 @@ export const productSlice = createSlice({
       const item = state.items.find((item) => item._id === action.payload._id);
       if (item) {
         item.quantity = action.payload.quantity;
-        console.log(item.quantity);
+        console.log('ini kuantitasnya ',item.quantity);
       } else {
         state.items.unshift(action.payload);
       }
@@ -113,7 +113,7 @@ export const productSlice = createSlice({
       }
       localStorage.setItem("productData", JSON.stringify(dataProduct));
       console.log('sisa stok = ',(dataProduct[indexToChange].quantity))
-      localStorage.setItem("cartItems", JSON.stringify(state.items));
+      localStorage.setItem("cartItems", JSON.stringify(dataProduct));
     },
     returnQuantity : (state)=>{
       savedCartItems.map((item)=>{
