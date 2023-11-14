@@ -121,6 +121,10 @@ export const productSlice = createSlice({
         Swal.fire({
           title: "Berhasil menambahkan kedalam keranjang",
           icon: "success"
+        }).then((result) => {
+          if (result.isConfirmed){
+            window.location.reload()
+          }
         })
       }
     },
