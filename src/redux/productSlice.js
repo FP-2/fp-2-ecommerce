@@ -40,7 +40,7 @@ export const productSlice = createSlice({
     fetchQuantity : (state,action)=>{
       state.quantity = action.payload;
     },
-    resetQuantity: (action) => {
+    resetQuantity: (state,action) => {
       console.log(action.payload)
       dataProduct.map((item)=>{
         if(item._id === action.payload._id){
@@ -49,7 +49,7 @@ export const productSlice = createSlice({
             title: "Sukses reset",
             icon: "success"
           }).then((result) => {
-            if (result.isConfirmed) {
+            if(result.isConfirmed) {
               navigate("/shop");
             }
           });
