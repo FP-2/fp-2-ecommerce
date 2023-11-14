@@ -11,7 +11,7 @@ const ProductDetails = () => {
   // const navigate = useNavigate();
   //location, untuk mengakses data yang telah di kirimkan melalui navigasi dari halaman sebelumnya yaitu state yang dikirimkan dari (/products card)
   const location = useLocation();
-  let [quantity] = useState(0);
+  let [quantity] = useState(1);
   const [productDetails, setProductDetails] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoggedInAdmin, setIsLoggedInAdmin] = useState(false);

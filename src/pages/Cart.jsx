@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import CartItem from "../components/CartItems";
 import { motion } from "framer-motion";
 import { scaleDown, slideLeft } from "../framerMotion";
-import { fetchAdmin, fetchTotal, fetchUser, resetCart } from "../redux/productSlice";
+import { fetchAdmin, fetchTotal, fetchUser } from "../redux/productSlice";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
 
@@ -14,16 +14,32 @@ const Cart = () => {
   const isLoggedIn = localStorage.getItem("auth") !== null;
   const user = JSON.parse(localStorage.getItem("auth")) || [];
   const dispatch = useDispatch();
+  item.map((items)=>{
+    console.log(items.quantity)
+  })
   console.log(user.usernameUser)
   const handleCheckout = () => {
-    dispatch(fetchUser(user.usernameUser));
-    dispatch(fetchTotal(totalAmount));
-    dispatch(fetchAdmin(item));
-    dispatch(resetCart());
-    navigate("/cart");
-    Swal.fire({
-        title: "Barang berhasil di checkout",
-        icon: "success"
+    item.map((items)=>{
+      if(items.quantity === 0){
+        console.log('jumlahnya ',items.quantity)
+        Swal.fire({
+          title: "Masukkan Jumlah",
+          icon: "error"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate("/shop");
+          }
+        });
+      }else{
+        dispatch(fetchUser(user.usernameUser));
+        dispatch(fetchTotal(totalAmount));
+        dispatch(fetchAdmin(item));
+        navigate("/cart");
+        Swal.fire({
+            title: "Barang berhasil di checkout",
+            icon: "success"
+        })
+      }
     })
   }
 

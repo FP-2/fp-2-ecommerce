@@ -40,7 +40,7 @@ export const productSlice = createSlice({
     fetchQuantity : (state,action)=>{
       state.quantity = action.payload;
     },
-    resetQuantity: (state, action) => {
+    resetQuantity: (action) => {
       console.log(action.payload)
       dataProduct.map((item)=>{
         if(item._id === action.payload._id){
@@ -67,7 +67,7 @@ export const productSlice = createSlice({
     },
     fetchAdmin : (state,action)=>{
       state.checkout = action.payload;
-      console.log(checkoutItems.length);
+      console.log(state.checkout);
       const info = {
         username : state.user || 'unknown',
         date : now,
@@ -75,14 +75,14 @@ export const productSlice = createSlice({
       };
       const Checkout = state.checkout.map(item => ({ ...item, ...info }));
       if(checkoutItems.length > 0){
-        console.log("1")
         const updateCheckout = checkoutItems.concat(Checkout);
         localStorage.setItem("checkoutItems", JSON.stringify(updateCheckout));
       }else{
-        console.log("0")
         localStorage.setItem("checkoutItems", JSON.stringify(Checkout));
       }
       console.log("anda berhasil checkout ",JSON.parse(localStorage.getItem('checkoutItems')));
+      state.items = [];
+      localStorage.setItem("cartItems", JSON.stringify(state.items));
       state.checkout = checkoutItems;
     },
     fetchTotal : (state,action)=>{
@@ -94,6 +94,15 @@ export const productSlice = createSlice({
     },
     addToCart: (state, action) => {
       const item = state.items.find((item) => item._id === action.payload._id);
+      dataProduct.map((items)=>{
+      if(action.payload._id === items._id){
+        items.quantity--;
+        console.log('kuantitasnya ',items.quantity)
+        // state.productData = items;
+      }
+      return items;
+      })
+      localStorage.setItem("productData", JSON.stringify(dataProduct));
       if (item) {
         item.quantity = action.payload.quantity;
         console.log('ini kuantitasnya ',item.quantity);
@@ -101,15 +110,39 @@ export const productSlice = createSlice({
         state.items.unshift(action.payload);
       }
       localStorage.setItem("cartItems", JSON.stringify(state.items));
+      // Swal.fire({
+      //   title: "Berhasil menambahkan kedalam keranjang",
+      //   icon: "success"
+      // })
     },
     removeFromCart: (state, action) => {
-      state.items = state.items.filter((item) => item._id !== action.payload);
+      state.items = state.items.filter((item) => item._id !== action.payload._id);
+      console.log(action.payload)
+      const indexToChange = dataProduct.findIndex((product) => product._id === action.payload._id);
+      if (indexToChange !== -1) {
+        dataProduct[indexToChange].quantity = dataProduct[indexToChange].quantity + action.payload.quantity;
+        state.productData = dataProduct;
+      }
+      console.log(dataProduct[indexToChange])
+      localStorage.setItem("productData", JSON.stringify(dataProduct));
       localStorage.setItem("cartItems", JSON.stringify(state.items));
     },
     resetCart: (state) => {
+      state.items.forEach((item) => {
+        console.log(item.quantity)
+        const indexToChange = dataProduct.findIndex((product) => product._id === item._id);
+        
+        if (indexToChange !== -1) {
+          dataProduct[indexToChange].quantity = dataProduct[indexToChange].quantity + item.quantity;
+          state.productData = dataProduct;
+        }
+        console.log(dataProduct[indexToChange])
+      });
+      // Set items di state menjadi array kosong
       state.items = [];
       localStorage.setItem("cartItems", JSON.stringify(state.items));
-    },
+      localStorage.setItem("productData", JSON.stringify(state.productData));
+    },    
     incrementQuantity: (state, action) => {
       const item = state.items.find((item) => item._id === action.payload._id);
       console.log(item.quantity);
@@ -122,10 +155,15 @@ export const productSlice = createSlice({
         })
       }else{
         item.quantity++;
-        dataProduct[indexToChange].quantity--; 
+        if(item.quantity === 1){
+          dataProduct[indexToChange].quantity = dataProduct[indexToChange].quantity - item.quantity;
+        }else{
+          dataProduct[indexToChange].quantity--;
+        }
       }
+      console.log(dataProduct[indexToChange].quantity)
       localStorage.setItem("productData", JSON.stringify(dataProduct));
-      console.log('sisa stok = ',(dataProduct[indexToChange].quantity))
+      console.log('sisa stok = ',(dataProduct[indexToChange].quantity));
       localStorage.setItem("cartItems", JSON.stringify(dataProduct));
     },
     returnQuantity : (state)=>{
@@ -147,7 +185,7 @@ export const productSlice = createSlice({
       }
       localStorage.setItem("productData", JSON.stringify(dataProduct));
       localStorage.setItem("cartItems", JSON.stringify(state.items));
-      console.log('sisa stok = ',(dataProduct[indexToChange].quantity)-1)
+      console.log('sisa stok = ',(dataProduct[indexToChange].quantity))
     },
   },
 });

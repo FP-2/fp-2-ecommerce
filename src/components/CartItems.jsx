@@ -40,7 +40,7 @@ const CartItem = () => {
               className="flex items-center justify-between gap-6 mt-6"
             >
               <div className="flex items-center gap-2">
-                <button onClick={() => dispatch(removeFromCart(item._id))}>
+                <button onClick={() => dispatch(removeFromCart(item))}>
                   <MdOutlineClose className="text-xl text-gray-600 hover:text-red-600 cursor-pointer duration-300" />
                 </button>
                 <img
@@ -71,7 +71,7 @@ const CartItem = () => {
                   >
                     -
                   </button>
-                  <div className="w-3">{item.quantity === 0 ? (1):(item.quantity)}</div>
+                  <div className="w-3">{item.quantity}</div>
                   <button
                     onClick={() =>
                       dispatch(
