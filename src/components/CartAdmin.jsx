@@ -7,14 +7,17 @@ import Swal from "sweetalert2";
 const CartAdmin = () => {
   const item = useSelector((state) => state.product.checkout);
   const isLoggedIn = localStorage.getItem("authAdmin") !== null;
+  const auth = localStorage.getItem("auth") !== null;
   const navigate = useNavigate();
   const handleAdmin = () => {
     Swal.fire({
       title: "Maaf anda bukan admin",
       icon: "error"
     }).then((result) => {
-      if (result.isConfirmed) {
-        navigate("/login");
+      if (result.isConfirmed && auth) {
+        navigate("/shop");
+      }else{
+        navigate('/login')
       }
     });
   }

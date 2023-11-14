@@ -94,26 +94,35 @@ export const productSlice = createSlice({
     },
     addToCart: (state, action) => {
       const item = state.items.find((item) => item._id === action.payload._id);
-      dataProduct.map((items)=>{
-      if(action.payload._id === items._id){
-        items.quantity--;
-        console.log('kuantitasnya ',items.quantity)
-        // state.productData = items;
+      const existingItem = state.items.find((item) => item._id === action.payload._id);
+      if (existingItem) {
+        Swal.fire({
+          title: "Item sudah ada dalam keranjang",
+          icon: "warning"
+        });
+        return state;
+      }else{
+        dataProduct.map((items)=>{
+        if(action.payload._id === items._id){
+          items.quantity--;
+          console.log('kuantitasnya ',items.quantity)
+          // state.productData = items;
+        }
+        return items;
+        })
+        localStorage.setItem("productData", JSON.stringify(dataProduct));
+        if (item) {
+          item.quantity = action.payload.quantity;
+          console.log('ini kuantitasnya ',item.quantity);
+        } else {
+          state.items.unshift(action.payload);
+        }
+        localStorage.setItem("cartItems", JSON.stringify(state.items));
+        Swal.fire({
+          title: "Berhasil menambahkan kedalam keranjang",
+          icon: "success"
+        })
       }
-      return items;
-      })
-      localStorage.setItem("productData", JSON.stringify(dataProduct));
-      if (item) {
-        item.quantity = action.payload.quantity;
-        console.log('ini kuantitasnya ',item.quantity);
-      } else {
-        state.items.unshift(action.payload);
-      }
-      localStorage.setItem("cartItems", JSON.stringify(state.items));
-      // Swal.fire({
-      //   title: "Berhasil menambahkan kedalam keranjang",
-      //   icon: "success"
-      // })
     },
     removeFromCart: (state, action) => {
       state.items = state.items.filter((item) => item._id !== action.payload._id);
