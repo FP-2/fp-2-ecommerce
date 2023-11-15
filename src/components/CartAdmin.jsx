@@ -24,11 +24,6 @@ const CartAdmin = () => {
   return (
     <motion.div {...slideDown}>
       <div className="w-full">
-      {[...new Set(item.map(items => items.username))].map((username, index) => (
-        <h2 key={index} className="font-tittleFont text-2xl">
-            Shopping Cart by {username}
-        </h2>
-        ))}
       </div>
       {!isLoggedIn ? (handleAdmin())
       : item.length === 0 ? (
@@ -41,6 +36,7 @@ const CartAdmin = () => {
         <thead>
         <tr className="flex  items-center justify-between mt-6">
             <th>Date</th>
+            <th>Username</th>
             <th>Preview</th>
             <th>Product</th>
             <th>Price</th>
@@ -52,6 +48,7 @@ const CartAdmin = () => {
             <tbody key={index}>
             <tr className="flex text-left items-center justify-start gap-x-32 mt-6">
                 <td>{item.date}</td>
+                <td>{item.username}</td>
                 <td>
                 <div className="flex items-center gap-2">
                 <img

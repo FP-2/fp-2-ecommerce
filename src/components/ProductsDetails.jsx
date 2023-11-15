@@ -53,16 +53,23 @@ const ProductDetails = () => {
 
   const handleAddToCart = () => {
     if (isLoggedIn === true) {
-      dispatch(
-        addToCart({
-          _id: productDetails._id,
-          title: productDetails.title,
-          image: productDetails.image,
-          price: productDetails.price,
-          quantity: quantity,
-          description: productDetails.description,
-        })
-      );
+      if(productDetails.quantity <= 0){
+        Swal.fire({
+          title: "Product Telah Sold Out",
+          icon: "info",
+        });
+      }else{
+        dispatch(
+          addToCart({
+            _id: productDetails._id,
+            title: productDetails.title,
+            image: productDetails.image,
+            price: productDetails.price,
+            quantity: quantity,
+            description: productDetails.description,
+          })
+        );
+      }
     } else {
       Swal.fire({
         title: "Silahkan login terlebih dahulu",

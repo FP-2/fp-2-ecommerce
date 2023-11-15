@@ -88,6 +88,7 @@ const ProductsCard = ({ product }) => {
               <p className="line-through text-gray-500">${product.oldPrice}</p>
               <p className="font-semibold">${product.price}</p>
             </div>
+            {isLoggedIn ? (
             <p
               onClick={handleAddToCart}
               className="absolute z-20 w-[100px] text-gray-500 hover:text-gray-900 flex items-center gap-1 top-0 transform -translate-x-32 group-hover:translate-x-0 transition-transform cursor-pointer duration-300"
@@ -98,6 +99,7 @@ const ProductsCard = ({ product }) => {
                 <BsArrowRight />
               </span>
             </p>
+            ):(<></>)}
           </div>
         </div>
         <div>

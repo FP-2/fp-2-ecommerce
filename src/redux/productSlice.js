@@ -6,11 +6,23 @@ import { useNavigate } from "react-router-dom";
 const savedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
 const checkoutItems = JSON.parse(localStorage.getItem("checkoutItems")) || [];
 const dataProduct = JSON.parse(localStorage.getItem("productData")) || [];
-const today = new Date();
 const navigate = useNavigate;
-const day = today.getDay();
+const today = new Date();
+const dayOfWeek = today.getDay();
 const daysOfWeek = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
-const now = daysOfWeek[day];
+const dayOfMonth = today.getDate();
+const month = today.getMonth() + 1; // Perlu ditambah 1 karena indeks bulan dimulai dari 0
+const year = today.getFullYear();
+
+const now = `${daysOfWeek[dayOfWeek]}, ${dayOfMonth} ${bulanIndonesia(month)} ${year}`;
+function bulanIndonesia(monthIndex) {
+  const namaBulan = [
+      "Januari", "Februari", "Maret", "April",
+      "Mei", "Juni", "Juli", "Agustus",
+      "September", "Oktober", "November", "Desember"
+  ];
+  return namaBulan[monthIndex - 1];
+}
 const initialState = {
   productData: [],
   total : 0,
@@ -51,6 +63,7 @@ export const productSlice = createSlice({
           }).then((result) => {
             if(result.isConfirmed) {
               navigate("/shop");
+              window.location.reload()
             }
           });
         }
