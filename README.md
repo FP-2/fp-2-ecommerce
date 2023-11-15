@@ -1,7 +1,7 @@
 # Kelompok 8
 Anggota  : Zaki, Imam, Yurio, Belinda
 Tema  : E-Commerce Menggunakkan API Dari Fakestore
-![image](https://user-images.githubusercontent.com/106313158/227732043-26c93db6-8256-4faa-9cb3-c4ba809036a5.png)
+![image](https://raw.githubusercontent.com/FP-2/fp-2-ecommerce/main/src/assets/1.png)
 Ini adalah tampilan untuk login user.
 ![image](https://user-images.githubusercontent.com/106313158/227732049-5bbe367e-6fae-4f36-a8ea-ebaa18f681e2.png)
 Ini halaman untuk user yang ingin mendaftar akunnya, karena jika belum terdaftar tidak bisa lanjut ke halaman menu.
