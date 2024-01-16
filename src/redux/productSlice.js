@@ -1,13 +1,14 @@
+// productSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 import { productsData } from "../api/Api";
 
 const initialState = {
   productData: [],
-  items: [],
+  cart: [],
   userInfo: null,
   loading: false,
   error: null,
-  count:0,
+  count: 0,
 };
 
 export const productSlice = createSlice({
@@ -20,8 +21,8 @@ export const productSlice = createSlice({
     setUserInfo: (state, action) => {
       state.userInfo = action.payload;
     },
-    setBadges : (state) =>{
-      state.count = JSON.parse(localStorage.getItem('cartItems'))?.length || 0;
+    setBadges: (state) => {
+      state.count = JSON.parse(localStorage.getItem('cartcart'))?.length || 0;
     },
     fetchProductsStart: (state) => {
       state.loading = true;
@@ -36,12 +37,12 @@ export const productSlice = createSlice({
       state.error = action.payload;
     },
     addToCart: (state, action) => {
-      state.items.push(action.payload); 
-      localStorage.setItem('cartItems', JSON.stringify(state.items));
+      state.cart.push(action.payload); 
+      localStorage.setItem('cartcart', JSON.stringify(state.cart));
     },
     removeFromCart: (state, action) => {
-      state.items = state.items.filter(item => item._id !== action.payload._id); 
-      localStorage.setItem('cartItems', JSON.stringify(state.items));
+      state.cart = state.cart.filter(item => item._id !== action.payload._id); 
+      localStorage.setItem('cartcart', JSON.stringify(state.cart));
     },
   },
 });

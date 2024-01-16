@@ -33,17 +33,17 @@ const Header = () => {
 
   return (
     <div className="shadow-lg w-full h-20 bg-white border-b-[1px] font-tittleFont sticky top-0 z-50">
-      <div className="max-w-screen-xl h-full mx-auto flex items-center justify-between">
-        {/* logo Team-VIII */}
+      <div className="max-w-screen-xl h-full mx-auto flex cart-center justify-between">
+        {/* logo MfiimShop */}
         <Link to="/">
           <div>
             <h1 className="font-tittleFont font-bold text-3xl hover:scale-105 duration-300">
-              Team-VIII
+              MFIIM-SHOP
             </h1>
           </div>
         </Link>
-        <div className="flex justify-center items-center gap-8">
-          <ul className="flex items-center gap-8">
+        <div className="flex justify-center cart-center gap-8">
+          <ul className="flex cart-center gap-8">
             {/* navbar E-commerce */}
             <li className="text-base text-black font-bold hover:text-orange-900 underline-offset-2 decoration-[1px] cursor-pointer hover:scale-105 duration-300">
               <Link to="/">E-Commerce</Link>
@@ -57,7 +57,7 @@ const Header = () => {
           { auth ? <Link onClick={handleLogout} className="text-red-600">Logout</Link> : <Link to="/login" className="text-green-600">Login</Link>}
           {/* navbar, Image Cart */}
           <Link to="/cart">
-            <div className="relative hover:scale-105 duration-300 flex items-center">
+            <div className="relative hover:scale-105 duration-300 flex cart-center">
               <img className="w-6" src={cartImg} alt="cartImg" />
               <MDBBadge className='ms-2'>{item}</MDBBadge>
             </div>

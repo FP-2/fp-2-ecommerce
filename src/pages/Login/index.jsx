@@ -67,7 +67,7 @@ const Login = () => {
     return (
         <Container fluid className="login-page">
         <Row>
-        <Col className="flex items-center justify-center">
+        <Col className="flex cart-center justify-center">
         <Form style={{ width: "80%", margin: "2.5rem auto" }} onSubmit={handleLogin}>
         <div className="text-5xl mb-5 text-center text-green-600 font-bold">Start Now</div>
             <Form.Group className="mb-3" controlId="formBasicEmail">

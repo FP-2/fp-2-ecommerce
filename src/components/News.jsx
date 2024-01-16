@@ -22,9 +22,7 @@ const News = () => {
     return(
         <div key={item._id}>
         <ProductsCard product={item} />
-        </div>
-    )}})}
-    </div>
+        </div>)}})}</div>
   );
 };
 

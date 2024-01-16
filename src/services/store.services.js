@@ -4,11 +4,11 @@ import { removeDuplicateData } from '../utils';
 // const API_KEY = '271e7a0971194c9cb5ed330cc3d92bc2';
 
 export const getStore = async () => {
-  const itemsData = await fetch(
+  const cartData = await fetch(
     `(https://fakestoreapi.com/products)`
     .then(res=>res.json())
     .then(json=>console.log(json)),
     { cache: 'no-store' }
   );
-  return removeDuplicateData(await itemsData.json());
+  return removeDuplicateData(await cartData.json());
 };
