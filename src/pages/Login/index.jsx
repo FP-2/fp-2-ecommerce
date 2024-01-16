@@ -18,7 +18,7 @@ const Login = () => {
             authenticate.roles === "user" ?
                 navigate("/")
                 :
-                navigate("/shop")
+                navigate("/admin")
         }
     })
 
@@ -31,10 +31,12 @@ const Login = () => {
         if (username === "admin@bukaajadulu.com" && password === "admin123") {
             const auth = {
                 token: "tokenadmin",
-                roles: "admin"
+                roles: "admin",
+                username : username,
+                password : password
             }
-            localStorage.setItem("auth", JSON.stringify(auth));
-            navigate("/");
+            localStorage.setItem("authAdmin", JSON.stringify(auth));
+            navigate("/admin");
             Swal.fire({
                 title: "Login Success",
                 icon: "success"
@@ -44,7 +46,9 @@ const Login = () => {
                 .then(res => {
                     const auth = {
                         token: res.data.token,
-                        roles: "user"
+                        roles: "user",
+                        usernameUser : username,
+                        passwordUser : password,
                     }
                     localStorage.setItem("auth", JSON.stringify(auth));
                     navigate("/");

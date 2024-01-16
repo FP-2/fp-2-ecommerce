@@ -11,18 +11,16 @@ import Shop from "./pages/Shop";
 import Login from "./pages/Login";
 import Footer from "./components/Footer";
 import ProductDetails from "./components/ProductsDetails";
-import './index.css';
-
+import "./index.css";
+import Admin from "./pages/Admin";
 
 const Layout = () => {
   return (
     <div>
       {/* bagian header navbar */}
       <Header />
-      {/* ScrollRestoration, untuk otomatis ke bagian paling atas saat ke home dari page lain,
-      agar tidak perlu scroll keatas terlebih dahulu */}
-      <ScrollRestoration />
       {/* bagian isi, bagian "children" di router bawah */}
+      <ScrollRestoration />
       <Outlet />
       {/* bagian Footer */}
       <Footer />
@@ -36,34 +34,32 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        //Home ecommerce
         element: <Ecommerce />,
       },
       {
+        path: "/admin",
+        element: <Admin />,
+      },
+      {
         path: "/productdetails/:id",
-        //page Product Details
         element: <ProductDetails />,
       },
       {
         path: "/cart",
-        //page cart checkout (testing routing)
         element: <Cart />,
       },
       {
         path: "/shop",
-        //page shop (testing routing)
         element: <Shop />,
       },
       {
         path: "/login",
-        //page login (testing routing)
         element: <Login />,
       },
     ],
   },
 ]);
 function App() {
-
   return (
     <div className="font-bodyFont">
       <RouterProvider router={router} />
